@@ -1,0 +1,27 @@
+{
+  "name": "mern-stack-instagram-clone",
+  "version": "1.0.0",
+  "description": "this is web application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/santoshkumar964887/mern-stack-instagram-clone.git"
+  },
+  "author": "Santosh Kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/santoshkumar964887/mern-stack-instagram-clone/issues"
+  },
+  "homepage": "https://github.com/santoshkumar964887/mern-stack-instagram-clone#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.7",
+    "nodemailer": "^6.4.11",
+    "nodemailer-sendgrid-transport": "^0.2.0"
+  }
+}
