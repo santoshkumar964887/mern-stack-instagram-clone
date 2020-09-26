@@ -1,1 +1,1 @@
-# mern-stack-instagram-clone-
+# mern-stack-instagram-clone
