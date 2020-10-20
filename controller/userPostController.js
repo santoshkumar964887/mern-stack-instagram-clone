@@ -24,3 +24,11 @@ exports.userPostController = async(req, res) => {
 
 };
 // fetching all post
+exports.getAllPosts= async(req,res)=>{
+  try{
+   const data=await userPostModel.find().populate("postedBy","_id name");
+   return res.status(200).json({status:"success",data});
+  } catch(err){
+    res.status(500).json({status:"fail",message:err})
+  }
+}
