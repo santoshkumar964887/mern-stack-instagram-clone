@@ -2,6 +2,7 @@ const jwt=require('jsonwebtoken');
 const mongoose= require('mongoose');
 const userModel=require('../model/userModel');
 const dotenv=require('dotenv');
+const { unsubscribe } = require('../router/userAuthRoute');
 dotenv.config({path:'../config.env'});
 module.exports=(req,res, next)=>{
     const {authorization}=req.headers;
@@ -15,11 +16,14 @@ module.exports=(req,res, next)=>{
     }
     const{_id}=payload;
     userModel.findById(_id).then(userData=>{
-        req.user=userData
+        
+        req.user=userData;
+
+        next();
     })
     
 
+
    })
 
-next();
 }

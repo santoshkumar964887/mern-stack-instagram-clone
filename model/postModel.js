@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-const { schema } = require('./userModel');
+const {ObjectId} = mongoose.Schema.Types
 const schema= new mongoose.Schema({
   title:{
       type:String,
@@ -14,8 +14,8 @@ const schema= new mongoose.Schema({
     default:"no image"
   },
   postedBy:{
-      type:ObjectId,
-      ref:user
+    type:ObjectId,
+    ref:"users"
 
   }
 });
