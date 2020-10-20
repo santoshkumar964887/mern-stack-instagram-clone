@@ -4,6 +4,7 @@ const userRequire=require('../middleware/userRequire');
 const express=require('express');
 const postRoute=express.Router();
 postRoute.route('/post').post(userRequire,controller.userPostController).get(controller.getAllPosts);
+postRoute.route('mypost').get(userRequire,controller.getMyPost);
 
 
 module.exports=postRoute;

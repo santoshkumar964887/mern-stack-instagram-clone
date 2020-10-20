@@ -32,3 +32,13 @@ exports.getAllPosts= async(req,res)=>{
     res.status(500).json({status:"fail",message:err})
   }
 }
+exports.getMyPost= async(req,res)=>{
+  Post.find({postedBy:req.user._id})
+    .populate("PostedBy","_id name")
+    .then(mypost=>{
+        res.json({mypost})
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}
