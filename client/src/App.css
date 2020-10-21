@@ -1,7 +1,26 @@
-.nav-wrapper{
+@import url("https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap");
+.nav-wrapper {
   background-color: rgba(240, 240, 240, 0.98);
-  
 }
-a{
+a {
   color: rgb(7, 6, 6) !important;
+}
+.brand-logo,h2{
+  margin-left: 20px;
+  font-family: "Grand Hotel", cursive !important;
+}
+.cardContainer{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  margin-top: 50px;
+}
+.card{
+  width: 500px;
+  padding: 20px;
+}
+.input-field input:focus {
+  border-bottom: 1px solid rgb(80, 148, 250) !important;
+  box-shadow: 0 1px 0 0 rgb(80, 148, 250) !important;
 }
