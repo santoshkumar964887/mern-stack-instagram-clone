@@ -24,6 +24,8 @@ export default function Login() {
             classes: "#b71c1c red darken-4",
           });
         } else {
+          localStorage.setItem("jwt", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
           M.toast({
             html: data.message,
             classes: "#1b5e20 green darken-4",

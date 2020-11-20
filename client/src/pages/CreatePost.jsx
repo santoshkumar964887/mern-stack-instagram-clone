@@ -1,11 +1,60 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import M from "materialize-css";
+import { useHistory } from "react-router-dom";
 export default function CreatePost() {
+  const history = useHistory();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [image, setImage] = useState("");
-  const HandleSubmit = () => {
-    console.log(image, body, title);
+  const [url, setUrl] = useState("");
+  useEffect(() => {
+    if (url) {
+      fetch("/api/v1/post", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
+        },
+        body: JSON.stringify({
+          title,
+          body,
+          pic: url,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) {
+            M.toast({ html: data.error, classes: "#c62828 red darken-3" });
+          } else {
+            M.toast({
+              html: "Created Post Successfully",
+              classes: "#43a047 green darken-1",
+            });
+            history.push("/");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [url]);
+
+  const postDetails = () => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "insta-clone");
+    data.append("cloud_name", "dkkhbanhm");
+    fetch("https://api.cloudinary.com/v1_1/dkkhbanhm/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUrl(data.url);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div
@@ -40,7 +89,7 @@ export default function CreatePost() {
       </div>
       <button
         className="btn waves-effect #1e88e5 blue darken-1"
-        onClick={HandleSubmit}
+        onClick={postDetails}
         type="submit"
         name="action"
       >
