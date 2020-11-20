@@ -5,22 +5,51 @@
 a {
   color: rgb(7, 6, 6) !important;
 }
-.brand-logo,h2{
+.brand-logo,
+h2 {
   margin-left: 20px;
   font-family: "Grand Hotel", cursive !important;
 }
-.cardContainer{
-  display:flex;
+.cardContainer {
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   margin-top: 50px;
 }
-.card{
+.card {
   width: 500px;
   padding: 20px;
 }
 .input-field input:focus {
   border-bottom: 1px solid rgb(80, 148, 250) !important;
   box-shadow: 0 1px 0 0 rgb(80, 148, 250) !important;
+}
+.imageProfile {
+  width: 220px;
+  height: 250px;
+  border-radius: 5px;
+  margin: 15px;
+  box-shadow: -1px -1px 10px 1px rgb(184, 184, 184);
+}
+.imageProfile:hover {
+  opacity: 0.8;
+  transition: all 1s ease-in-out;
+  transform: scale(1.03);
+  cursor: pointer;
+}
+.imageProfileContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.home-card {
+  max-width: 500px;
+  height: max-content;
+  margin: 26px auto;
+}
+#toast-container {
+  top: 40px !important;
+  right: 40px !important;
+  left: auto !important;
 }

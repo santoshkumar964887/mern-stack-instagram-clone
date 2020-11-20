@@ -3,10 +3,12 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const userAuthRouter = require('./router/userAuthRoute.js');
 const userPostRouter = require('./router/userPostsRoute');
+const cors =require('cors');
 dotenv.config({ path: "./config.env" });
 const port = process.env.PORT || 5000;
 const app = express();
 app.use(express.json());
+app.use(cors())
 mongoose
   .connect(process.env.DATABASE, {
     useNewUrlParser: true,
