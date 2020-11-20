@@ -24,11 +24,11 @@ export default function CreatePost() {
         .then((res) => res.json())
         .then((data) => {
           if (data.error) {
-            M.toast({ html: data.error, classes: "#c62828 red darken-3" });
+            M.toast({ html: data.error, classes: "#b71c1c red darken-4" });
           } else {
             M.toast({
               html: "Created Post Successfully",
-              classes: "#43a047 green darken-1",
+              classes: "#1b5e20 green darken-4",
             });
             history.push("/");
           }
@@ -40,6 +40,12 @@ export default function CreatePost() {
   }, [url]);
 
   const postDetails = () => {
+    if (!title || !body || !image) {
+      M.toast({
+        html: "Please provide all the inputs",
+        classes: "#b71c1c red darken-4",
+      });
+    }
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "insta-clone");
