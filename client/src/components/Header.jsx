@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { userContext } from "../App.js";
 const Header = () => {
-  const { state } = useContext(userContext);
+  const { state, dispatch } = useContext(userContext);
   const NavigationCondition = () => {
+    const history = useHistory();
     if (state) {
       return [
         <li>
@@ -12,6 +13,18 @@ const Header = () => {
         <li>
           <Link to="/profile">Profile</Link>
         </li>,
+        <button
+          className="btn #d50000 red accent-4"
+          type="submit"
+          name="action"
+          onClick={() => {
+            localStorage.clear();
+            dispatch({ type: "CLEAR" });
+            history.push("/login");
+          }}
+        >
+          Sign Out
+        </button>,
       ];
     } else {
       return [
