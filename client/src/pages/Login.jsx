@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import M from "materialize-css";
+import { userContext } from "../App.js";
 export default function Login() {
   const history = useHistory();
+  const { state, dispatch } = useContext(userContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const HandleSubmit = () => {
@@ -26,11 +28,11 @@ export default function Login() {
         } else {
           localStorage.setItem("jwt", data.token);
           localStorage.setItem("user", JSON.stringify(data.user));
+          dispatch({ type: "USER", payload: data.user });
           M.toast({
             html: data.message,
             classes: "#1b5e20 green darken-4",
           });
-          console.log(data);
           history.push("/");
         }
       })
