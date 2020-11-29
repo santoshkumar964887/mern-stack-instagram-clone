@@ -31,21 +31,18 @@ exports.getAllPosts = async (req, res) => {
     res.status(500).json({ status: "fail", message: err });
   }
 };
-exports.getMyPost = async (req, res) => {
-  try {
-    Post.find({ postedBy: req.user._id })
-      .populate("PostedBy", "_id name")
-      .then((data) => {
-        return res
-          .status(200)
-          .json({ status: "success", "number of items": data.length, data });
-      })
-      .catch((err) => {
-        res
-          .status(500)
-          .json({ status: "fail", message: "internal server error" });
-      });
-  } catch (err) {
-    res.status(500).json({ status: "fail", message: "internal server error" });
-  }
+exports.getMyPost = (req, res) => {
+  userPostModel
+    .find({ postedBy: req.user._id })
+    .populate("PostedBy", "_id name")
+    .then((data) => {
+      return res
+        .status(200)
+        .json({ status: "success", "number of items": data.length, data });
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ status: "fail", message: "internal server error" });
+    });
 };

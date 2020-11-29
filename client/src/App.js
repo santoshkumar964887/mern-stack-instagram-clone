@@ -12,11 +12,10 @@ import "./App.css";
 export const userContext = createContext();
 const Routing = () => {
   const history = useHistory();
-  const { state, dispatch } = useContext(userContext);
+  const { dispatch } = useContext(userContext);
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
-      history.push("/");
       dispatch({ type: "USER", payload: user });
     } else {
       history.push("/login");

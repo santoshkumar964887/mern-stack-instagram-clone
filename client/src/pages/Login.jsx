@@ -4,7 +4,7 @@ import M from "materialize-css";
 import { userContext } from "../App.js";
 export default function Login() {
   const history = useHistory();
-  const { state, dispatch } = useContext(userContext);
+  const { dispatch } = useContext(userContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const HandleSubmit = () => {
