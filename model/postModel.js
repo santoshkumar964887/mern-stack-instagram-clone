@@ -13,6 +13,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  likes: [{ type: ObjectId, ref: "users" }],
   postedBy: {
     type: ObjectId,
     ref: "users",

@@ -46,3 +46,43 @@ exports.getMyPost = (req, res) => {
         .json({ status: "fail", message: "internal server error" });
     });
 };
+exports.likePost = (req, res) => {
+  userPostModel
+    .findByIdAndUpdate(
+      req.body.postID,
+      {
+        $push: { likes: req.user._id },
+      },
+      { new: true }
+    )
+    .exec((err, result) => {
+      if (err) {
+        return res.status(422).json({
+          status: "fail",
+          message: err,
+        });
+      } else {
+        return res.status(200).json({ status: "success", data: result });
+      }
+    });
+};
+exports.DisLikePost = (req, res) => {
+  userPostModel
+    .findByIdAndUpdate(
+      req.body.postID,
+      {
+        $pull: { likes: req.user._id },
+      },
+      { new: true }
+    )
+    .exec((err, result) => {
+      if (err) {
+        return res.status(422).json({
+          status: "fail",
+          message: err,
+        });
+      } else {
+        return res.status(200).json({ status: "success", data: result });
+      }
+    });
+};
