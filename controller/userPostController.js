@@ -23,7 +23,10 @@ exports.userPostController = async (req, res) => {
 // fetching all post
 exports.getAllPosts = async (req, res) => {
   try {
-    const data = await userPostModel.find().populate("postedBy", "_id name");
+    const data = await userPostModel
+      .find()
+      .populate("postedBy", "_id name")
+      .populate("comments.postedBy", "_id name");
     return res
       .status(200)
       .json({ status: "success", "number of items": data.length, data });
@@ -102,6 +105,7 @@ exports.CommentOnPost = (req, res) => {
       { new: true }
     )
     .populate("comments.postedBy", "_id name")
+    .populate("postedBy", "_id name")
     .exec((err, result) => {
       if (err) {
         return res.status(422).json({

@@ -19,6 +19,8 @@ export default function Home() {
         setResult(result.data);
       });
   }, [result]);
+
+  // Like handler
   const LikeHandler = (id) => {
     fetch("/api/v1/like", {
       method: "put",
@@ -44,6 +46,8 @@ export default function Home() {
         setResult(newdata);
       });
   };
+
+  // DisLike handler
   const DisLikeHandler = (id) => {
     fetch("/api/v1/dislike", {
       method: "put",
@@ -68,7 +72,32 @@ export default function Home() {
         setResult(newdata);
       });
   };
+  // Making comment
+  const commentHandler = (text, postID) => {
+    fetch("/api/v1/comment", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        postID,
+        text,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        const newdata = result.map((item) => {
+          if (item._id === res._id) {
+            return res;
+          } else {
+            return item;
+          }
+        });
 
+        setResult(newdata);
+      });
+  };
   return (
     <div className="home">
       {result.length ? (
@@ -101,7 +130,33 @@ export default function Home() {
               <h6>{item.likes ? item.likes.length : null} Likes</h6>
               <h6>{item.title}</h6>
               <p> {item.body}</p>
-              <input type="text" placeholder="Add your comment" />
+              {item.comments.length
+                ? item.comments.map((comment) => {
+                    return (
+                      <div key={comment._id}>
+                        <span
+                          style={{ fontSize: "14px", fontWeight: "normal" }}
+                        >
+                          {comment.text}
+                        </span>
+                        {"  "}
+                        <span style={{ fontSize: "8px", fontWeight: "bold" }}>
+                          {" "}
+                          {comment.postedBy.name}
+                        </span>
+                      </div>
+                    );
+                  })
+                : null}
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  commentHandler(e.target[0].value, item._id);
+                  e.target[0].value = "";
+                }}
+              >
+                <input type="text" placeholder="Add your comment" />
+              </form>
             </div>
           </div>
         ))
