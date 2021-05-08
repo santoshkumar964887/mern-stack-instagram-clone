@@ -27,7 +27,9 @@ export default function Home() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        const newdata = [res, ...result];
+        setResult(newdata);
       });
   };
   const DisLikeHandler = (id) => {
@@ -46,7 +48,7 @@ export default function Home() {
         console.log(result);
       });
   };
-
+  console.log(result);
   return (
     <div className="home">
       {result ? (
