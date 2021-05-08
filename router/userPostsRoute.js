@@ -10,4 +10,5 @@ postRoute
 postRoute.route("/mypost").get(userRequire, controller.getMyPost);
 postRoute.route("/like").put(userRequire, controller.likePost);
 postRoute.route("/dislike").put(userRequire, controller.DisLikePost);
+postRoute.route("/comment").put(userRequire, controller.CommentOnPost);
 module.exports = postRoute;

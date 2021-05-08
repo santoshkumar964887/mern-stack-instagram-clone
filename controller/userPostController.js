@@ -86,3 +86,30 @@ exports.DisLikePost = (req, res) => {
       }
     });
 };
+
+exports.CommentOnPost = (req, res) => {
+  let comment = {
+    text: req.body.text,
+    postedBy: req.user._id,
+  };
+
+  userPostModel
+    .findByIdAndUpdate(
+      req.body.postID,
+      {
+        $push: { comments: comment },
+      },
+      { new: true }
+    )
+    .populate("comments.postedBy", "_id name")
+    .exec((err, result) => {
+      if (err) {
+        return res.status(422).json({
+          status: "fail",
+          message: err,
+        });
+      } else {
+        return res.status(200).json({ status: "success", data: result });
+      }
+    });
+};

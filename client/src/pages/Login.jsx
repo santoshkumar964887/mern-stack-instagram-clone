@@ -8,6 +8,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const HandleSubmit = () => {
+    console.log(email, password);
     fetch("/api/v1/login", {
       method: "post",
       headers: {
